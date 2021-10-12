@@ -1,17 +1,33 @@
 from flask import Flask, render_template, request, flash,  redirect
-import utils
-import os
 
 app = Flask(__name__)
 
+if __name__ == '__main__':
+    app.run()
 
-@app.route('/')
+
+@app.route('/',methods=['GET', 'POST'])
 def index():  # put application's code here
     return render_template('index.html')
 
+@app.route('/status', methods=['GET', 'POST'])
+def status():
+    return render_template('status.html')
 
-@app.route('/', methods=['GET', 'POST'])
-def login():
+@app.route('/Menu_adm' , methods=['GET', 'POST'])
+def Menu_adm():  # put application's code here
+    return render_template('menu_administrador.html')
+
+@app.route('/edit_user' ,methods=['GET', 'POST'])
+def edit_user():  # put application's code here
+    return render_template('edit_user.html')
+
+@app.route('/add_new_user',methods=['GET', 'POST'])
+def a_n_u():  # put application's code here
+    return render_template('add_new_user.html')
+
+
+    """""
     try:
         if request.method == 'POST':
             username = request.form['username']
@@ -39,6 +55,5 @@ def login():
         print(ex)
         return render_template('index.html')
 
+"""""
 
-if __name__ == '__main__':
-    app.run()
