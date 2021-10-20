@@ -14,55 +14,55 @@ def index():  # put application's code here
 
 @app.route('/menu_empleado', methods=['GET', 'POST'])
 def menu_empleado():
-    return render_template('/templates/Paginas Usuario/Pagina visualizar informacion/Página-2.html')
+    return render_template('/templates/Paginas Usuario/Pagina visualizar informacion/VisualizarUsuarioFinal.html')
 
 @app.route('/menu_administrador' , methods=['GET', 'POST'])
 def menu_administrador():  # put application's code here
-    return render_template('/templates/Paginas Administrador/GestorAdmin/gestorEmpleadosAdmin-1.html')
+    return render_template('/templates/Paginas Administrador/GestorAdmin/gestorEmpleadosAdmin.html')
 
 @app.route('/admin_editar_empleado' ,methods=['GET', 'POST'])
 def admin_editar_empleado():  # put application's code here
-    return render_template('/templates/Paginas Administrador/EditarEmpleado/AgregarEmpleados-1.html')
+    return render_template('/templates/Paginas Administrador/EditarEmpleado/EditarEmpleados.html')
 
 @app.route('/admin_agregar_empleado',methods=['GET', 'POST'])
 def admin_agregar_empleado():  # put application's code here
-    return render_template('/templates/Paginas Administrador/AgregarEmpleados/AgregarEmpleados-1.html')
+    return render_template('/templates/Paginas Administrador/AgregarEmpleados/AgregarEmpleados.html')
 
 @app.route('/admin_buscar_empleado',methods=['GET', 'POST'])
 def admin_buscar_empleado():
-    return render_template('/templates/Paginas Administrador/BuscarEmpleados/BuscarEmpleado-1.html')
+    return render_template('/templates/Paginas Administrador/BuscarEmpleados/BuscarEmpleado.html')
 
 @app.route('/desempeño_empleado_desde_admin',methods=['GET', 'POST'])
 def desempeño_empleado_desde_admin():
-    return render_template('/templates/Paginas Administrador/NotaEmpleado/Página-2.html')
+    return render_template('/templates/Paginas Administrador/NotaEmpleado/DesempeñoEmpleado.html')
 
 @app.route('/visualizar_empleado_desde_admin',methods=['GET', 'POST'])
 def desempeño_empleado_desde_admin():
-    return render_template('/templates/Paginas Administrador/VisualAdmin/Visualisador-desde-Admin-1.html')
+    return render_template('/templates/Paginas Administrador/VisualAdmin/VisualisadordesdeAdmin.html')
 
 @app.route('/menu_superadministrador',methods=['GET', 'POST'])
 def menu_superadministrador():
-    return render_template('/templates/Paginas Super Admin/GestorAdmin/gestorEmpleadosAdmin-1.html')
+    return render_template('/templates/Paginas Super Admin/GestorAdmin/gestorUsuarioSuper.html')
 
 @app.route('/superadmin_editar_usuario' ,methods=['GET', 'POST'])
 def superadmin_editar_usuario():  # put application's code here
-    return render_template('/templates/Paginas Super Admin/EditarUsuario/AgregarEmpleados-1.html')
+    return render_template('/templates/Paginas Super Admin/EditarUsuario/EditarUsuarioSuper.html')
 
 @app.route('/superadmin_agregar_usuario',methods=['GET', 'POST'])
 def superadmin_agregar_usuario():  # put application's code here
-    return render_template('/templates/Paginas Super Admin/AgregarUsuarios/AgregarEmpleados-1.html')
+    return render_template('/templates/Paginas Super Admin/AgregarUsuario/AgregarUsuario.html')
 
 @app.route('/superadmin_buscar_y_eliminar_usuarios',methods=['GET', 'POST'])
 def superadmin_buscar_y_eliminar_usuarios():  # put application's code here
-    return render_template('/templates/Paginas Super Admin/BuscaryEliminarUsers/BuscarEmpleado-1.html')
+    return render_template('/templates/Paginas Super Admin/BuscaryEliminarUsers/BuscarEliminarUsuario.html')
 
 @app.route('/desempeño_usuario_desde_superadmin',methods=['GET', 'POST'])
 def desempeño_usuario_desde_superadmin():
-    return render_template('/templates/Paginas Super Admin/NotaUsuario/Página-2.html')
+    return render_template('/templates/Paginas Super Admin/NotaUsuario/DesempeñodesdeSuper.html')
 
 @app.route('/visualizar_usuario_desde_superadmin',methods=['GET', 'POST'])
 def visualizar_usuario_desde_superadmin():
-    return render_template('/templates/Paginas Super Admin/VisualAdmin/Visualisador-desde-Admin-1.html')
+    return render_template('/templates/Paginas Super Admin/VisualAdmin/VisualizardesdeSuper.html')
 
 
     """
