@@ -1,107 +1,136 @@
-from flask import Flask, render_template, request, flash,  redirect, g
-from db import get_db
-#import utils
-import os
+from flask import Flask, render_template, request, flash
 
 app = Flask(__name__)
 
-if __name__ == '__main__':
-    app.run()
 
-@app.route('/',methods=['GET', 'POST'])
-def index():  # put application's code here
-    return render_template('index.html')
-
-@app.route('/menu_empleado', methods=['GET', 'POST'])
-def menu_empleado():
-    return render_template('/templates/Paginas Usuario/Pagina visualizar informacion/VisualizarUsuarioFinal.html')
-
-@app.route('/menu_administrador' , methods=['GET', 'POST'])
-def menu_administrador():  # put application's code here
-    return render_template('/templates/Paginas Administrador/GestorAdmin/gestorEmpleadosAdmin.html')
-
-@app.route('/admin_editar_empleado' ,methods=['GET', 'POST'])
-def admin_editar_empleado():  # put application's code here
-    return render_template('/templates/Paginas Administrador/EditarEmpleado/EditarEmpleados.html')
-
-@app.route('/admin_agregar_empleado',methods=['GET', 'POST'])
-def admin_agregar_empleado():  # put application's code here
-    return render_template('/templates/Paginas Administrador/AgregarEmpleados/AgregarEmpleados.html')
-
-@app.route('/admin_buscar_empleado',methods=['GET', 'POST'])
-def admin_buscar_empleado():
-    return render_template('/templates/Paginas Administrador/BuscarEmpleados/BuscarEmpleado.html')
-
-@app.route('/desempeño_empleado_desde_admin',methods=['GET', 'POST'])
-def desempeño_empleado_desde_admin():
-    return render_template('/templates/Paginas Administrador/NotaEmpleado/DesempeñoEmpleado.html')
-
-@app.route('/visualizar_empleado_desde_admin',methods=['GET', 'POST'])
-def desempeño_empleado_desde_admin():
-    return render_template('/templates/Paginas Administrador/VisualAdmin/VisualisadordesdeAdmin.html')
-
-@app.route('/menu_superadministrador',methods=['GET', 'POST'])
-def menu_superadministrador():
-    return render_template('/templates/Paginas Super Admin/GestorAdmin/gestorUsuarioSuper.html')
-
-@app.route('/superadmin_editar_usuario' ,methods=['GET', 'POST'])
-def superadmin_editar_usuario():  # put application's code here
-    return render_template('/templates/Paginas Super Admin/EditarUsuario/EditarUsuarioSuper.html')
-
-@app.route('/superadmin_agregar_usuario',methods=['GET', 'POST'])
-def superadmin_agregar_usuario():  # put application's code here
-    return render_template('/templates/Paginas Super Admin/AgregarUsuario/AgregarUsuario.html')
-
-@app.route('/superadmin_buscar_y_eliminar_usuarios',methods=['GET', 'POST'])
-def superadmin_buscar_y_eliminar_usuarios():  # put application's code here
-    return render_template('/templates/Paginas Super Admin/BuscaryEliminarUsers/BuscarEliminarUsuario.html')
-
-@app.route('/desempeño_usuario_desde_superadmin',methods=['GET', 'POST'])
-def desempeño_usuario_desde_superadmin():
-    return render_template('/templates/Paginas Super Admin/NotaUsuario/DesempeñodesdeSuper.html')
-
-@app.route('/visualizar_usuario_desde_superadmin',methods=['GET', 'POST'])
-def visualizar_usuario_desde_superadmin():
-    return render_template('/templates/Paginas Super Admin/VisualAdmin/VisualizardesdeSuper.html')
-
-
-    """
+@app.route('/')
+def index():
     try:
-        if request.method == 'POST':
+        if request.method =='POST':
+
             username = request.form['username']
+
             password = request.form['password']
-            print(1)
-                        
-            db = get_db()
-            error = None
-            
+
             if not username:
                 error = 'Debes ingresar un usuario'
                 flash(error)
                 return render_template('index.html')
-            
+
             if not password:
                 error = 'Debes ingresar una contraseña'
                 flash(error)
                 return render_template('index.html')
-            
-            user = db.execute('SELECT * FROM usuario WHERE usuario= ?', (username, )).fetchone()
-            
-            if user is None:
-                error = 'Usuario o contraseña inválidos'
-            else:
-                return "Hola" 
-            
-            if username == 'Prueba' and password == 'Prueba123':
-                return redirect("status.html")
-            else:
-                error = 'usuario o contraseñas invalidos'
-                flash(error)
-                return render_template('index.html')
+
+            username == 'BACCA1' and password == '1234'
+
+            return render_template('VisualizarUsuarioFinal.html')
         else:
-            print(2)
             return render_template('index.html')
     except Exception as ex:
-        print(3)
         print(ex)
-        return render_template('index.html')"""
+        return render_template('index.html')
+
+   # return render_template('index.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():  # put application's code here
+    try:
+        if request.method =='POST':
+            username = request.form['username']
+            password = request.form['password']
+
+
+            if not username:
+                error = 'Debes ingresar un usuario'
+                flash(error)
+                return render_template('index.html')
+
+            if not password:
+                error = 'Debes ingresar una contraseña'
+                flash(error)
+                return render_template('index.html')
+
+            if username == 'SuperADM' and password == '1234':
+                return render_template('gestorUsuarioSuper.html')
+            if username == 'ADMIN' and password == '1234':
+                return render_template('gestorEmpleadosAdmin.html')
+            if username == 'empleado'and password == '1234':
+                return render_template('VisualizarUsuarioFinal.html')
+            else:
+                return render_template('index.html')
+        else:
+            return render_template('index.html')
+    except Exception as ex:
+        print(ex)
+        return render_template('index.html')
+
+   # return render_template('index.html')
+
+@app.route('/menu_empleado', methods=['GET', 'POST'])
+def menu_empleado():
+    return render_template('VisualizarUsuarioFinal.html')
+
+
+@app.route('/menu_administrador', methods=['GET', 'POST'])
+def menu_administrador():
+    return render_template('gestorEmpleadosAdmin.html')
+
+
+@app.route('/AgregarEmpleados', methods=['GET', 'POST'])
+def agregarEmpleados():
+    return render_template('AgregarEmpleados.html')
+
+
+@app.route('/BuscarEmpleados', methods=['GET', 'POST'])
+def buscarEmpleados():
+    return render_template('BuscarEmpleado.html')
+
+
+@app.route('/EditarEmpleados', methods=['GET', 'POST'])
+def editarEmpleados():
+    return render_template('EditarEmpleados.html')
+
+
+@app.route('/DesempeñoEmpleados', methods=['GET', 'POST'])
+def desempeñoEmpleados():
+    return render_template('DesempeñoEmpleado.html')
+
+
+@app.route('/VisualizadordesdeAdmin', methods=['GET', 'POST'])
+def visualizadordesdeAdmin():
+    return render_template('VisualisadordesdeAdmin.html')
+
+
+@app.route('/GestorUsuariosSuper', methods=['GET', 'POST'])
+def gestorUsuariSuper():
+    return render_template('gestorUsuarioSuper.html')
+
+
+@app.route('/AgregarUsuarioSuper', methods=['GET', 'POST'])
+def agregarUsuarioSuper():
+    return render_template('AgregarUsuario.html')
+
+
+@app.route('/EditarUsuariosuper', methods=['GET', 'POST'])
+def editarUsuariosuper():
+    return render_template('EditarUsuarioSuper.html')
+
+
+@app.route('/BuscaryEliminarUsuario', methods=['GET', 'POST'])
+def buscaryEliminarUsuario():
+    return render_template('BuscarEliminarUsuario.html')
+
+
+@app.route('/DesempeñoUsuarioSuper', methods=['GET', 'POST'])
+def desempeñoUsuarioSuper():
+    return render_template('DesempeñodesdeSuper.html')
+
+
+@app.route('/VisualizarUsuarioSuper', methods=['GET', 'POST'])
+def visualizarUsuarioSupe():
+    return render_template('VisualizardesdeSuper.html')
+
+
+if __name__ == '__main__':
+    app.run()
