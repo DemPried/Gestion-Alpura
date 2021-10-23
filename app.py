@@ -86,6 +86,29 @@ def menu_administrador():
 def agregarEmpleados():
     return render_template('AgregarEmpleados.html')
 
+# esto es para crear un empleado nuevo
+
+"""
+def convertir_foto_a_binario(foto):
+    with open(foto, 'rb') as f:
+        blob = f.read()
+        
+    return blob
+
+def crearEmpleado(db, usuario):
+    foto_binario = convertir_foto_a_binario(usuario[-1])
+    
+    db = get_db()
+    usuario = db.execute("INSERT INTO usuario (usuario, nombres, apellidos, salario, cod_tipo_contrato, dependencia, fecha_inicio, fecha_final, correo, contraseña, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"%
+                        (usuario[0], usuario[1], usuario[2], usuario[3], usuario[4], usuario[5], usuario[6], usuario[7], usuario[8], usuario[9], foto_binario))
+    db.commit()        
+    
+foto_archivo = '/static/images/foto empleado.png'
+
+empleado_creado = 'Usuario Creado Correctamente'
+flash(empleado_creado) 
+"""
+
 @app.route('/BuscarEmpleados', methods=['GET', 'POST'])
 def buscarEmpleados():
     return render_template('BuscarEmpleado.html')
