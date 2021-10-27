@@ -43,36 +43,6 @@ def index():
         print(ex)
         return render_template('index.html')
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():  # put application's code here
-    try:
-        if request.method =='POST':
-            username = request.form['username']
-            password = request.form['password']
-
-            if not username:
-                error = 'Debes ingresar un usuario'
-                flash(error)
-                return render_template('index.html')
-
-            if not password:
-                error = 'Debes ingresar una contraseña'
-                flash(error)
-                return render_template('index.html')
-
-            if username == 'SuperADM' and password == '1234':
-                return render_template('gestorUsuarioSuper.html')
-            if username == 'ADMIN' and password == '1234':
-                return render_template('gestorEmpleadosAdmin.html')
-            if username == 'empleado'and password == '1234':
-                return redirect(url_for('menu_empleado'))
-            else:
-                return render_template('index.html')
-        else:
-            return render_template('index.html')
-    except Exception as ex:
-        print(ex)
-        return render_template('index.html')
 
 @app.route('/menu_empleado', methods=['GET', 'POST'])
 def menu_empleado():
@@ -83,7 +53,22 @@ def menu_administrador():
     return render_template('gestorEmpleadosAdmin.html')
 
 @app.route('/AgregarEmpleados', methods=['GET', 'POST'])
-def agregarEmpleados():
+def btn_agregarEmpleados():
+
+    try:
+
+        db = get_db()
+
+        num = db.executemany("SELECT id_doc, id_cargo, id_contrato, id_dependencia FROM documento, cargo, contrato, dependencia WHERE desc_documento = '?' AND des_cargo = '?' AND des_contrato ='?'  AND des_dependencia = '?';", (selectIDtype, selectCargo, selectContractType, selectDependencia)).fetchone()
+
+        user = db.executemany("INSERT INTO empleados (tipo_doc, documento, usuario, nombres, apellidos, salario, cod_tipo_contrato, cargo, dependencia, fecha_inicio, fecha_final, correo, contraseña) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            (num[0], IDnumber, 1, name, lastNames, Salary, num[2], num[1], num[3], fechadeingreso, Findelcontrato, Mail, Password))
+        db.commit()
+
+    except Exception as ex:
+        print(ex)
+
+
     return render_template('AgregarEmpleados.html')
 
 # esto es para crear un empleado nuevo
