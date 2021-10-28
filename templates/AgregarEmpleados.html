@@ -36,9 +36,9 @@
       <div class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xs u-container-style u-group u-shape-rectangle u-group-2">
         <div class="u-container-layout u-valign-middle u-container-layout-2">
           <div class="u-form u-form-1">
-            <form action="{{ url_for('btn_agregarEmpleados') }}" method="POST" class="u-clearfix u-form-spacing-2 u-form-vertical u-inner-form" source="email" name="form" style="padding: 10px;">
-              <input type="hidden" id="siteId" name="siteId" value="852145">
-              <input type="hidden" id="pageId" name="pageId" value="852371">
+            <form action="{{ url_for('btn_agregarEmpleados') }}" method="POST" class="u-clearfix u-form-spacing-2 u-form-vertical u-inner-form"  name="form" style="padding: 10px;">
+            <!--  <input type="hidden" id="siteId" name="siteId" value="852145">
+              <input type="hidden" id="pageId" name="pageId" value="852371">-->
               <div class="u-form-group u-form-name">
                 <label for="name-4215" class="u-label u-text-palette-1-dark-1">Nombres</label>
                 <input type="text" placeholder="Introduzca nombre" id="name-4215" name="name" class="u-border-2 u-border-custom-color-1 u-input u-input-rectangle u-radius-15 u-white u-input-1" required="">
@@ -135,13 +135,13 @@
                 <input type="text" placeholder="Ingrese el Salario" id="text-d32c" name="Password" class="u-border-2 u-border-custom-color-1 u-input u-input-rectangle u-radius-15 u-white u-input-10">
               </div>
               <div class="u-align-center u-form-group u-form-submit">
-                <a class="u-align-center u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-hover-palette-1-light-1 u-radius-50 u-btn-1" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">GUARDAR EMPLEADO<br>
-                </a>
-                <input type="submit" action="" value="submit" class="u-form-control-hidden">
+                <!--<a class="u-align-center u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-hover-palette-1-light-1 u-radius-50 u-btn-1" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">GUARDAR EMPLEADO<br>
+                </a>-->
+                <input type="submit" action="{{ url_for('btn_agregarEmpleados') }}" value="submit" class="">
               </div>
-              <div class="u-form-send-message u-form-send-success"> Gracias! Tu mensaje ha sido enviado. </div>
+              <!--<div class="u-form-send-message u-form-send-success"> Gracias! Tu mensaje ha sido enviado. </div>
               <div class="u-form-send-error u-form-send-message"> No se puede enviar su mensaje. Por favor, corrija los errores y vuelva a intentarlo. </div>
-              <input type="hidden" value="" name="recaptchaResponse">
+              <input type="hidden" value="" name="recaptchaResponse">-->
             </form>
           </div>
         </div>
