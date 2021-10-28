@@ -105,7 +105,7 @@
                     u-text-1
                   "
                 >
-                  Carlos Alberto<br />Rodriguez Moreno
+                  <output name="nombres" method="GET"> {{ data.0 }}</output><br /><output name="apellidos" method="GET"> {{ data.1 }}</output>
                 </h3>
               </div>
             </div>
@@ -175,25 +175,22 @@
                   u-text-2
                 "
               >
-                <span style="font-size: 1.125rem">Documento: 123456</span>&nbsp;
+                <span>Documento: <output name="documento" method="GET"> {{ data.2 }}</output></span>&nbsp;
               </h4>
               <h4 class="u-text u-text-default-lg u-text-default-xl u-text-3">
                 <span style="text-decoration: underline !important">T</span>
                 <span style="text-decoration: underline !important"
-                  >ipo de contrato: Prestación<span
-                    style="text-decoration: underline !important"
-                  ></span>
-                  de Servicios
+                  >ipo de contrato: <output name="cod_tipo_contrato" method="GET"> {{ data.3 }}</output>
                 </span>
               </h4>
               <h4 class="u-text u-text-default-lg u-text-default-xl u-text-4">
-                Fecha de Ingreso: 30 de Septiembre del 2021
+                Fecha de Ingreso: <output name="fecha_inicio" method="GET"> {{ data.4 }}</output>
               </h4>
               <h4 class="u-text u-text-default-lg u-text-default-xl u-text-5">
-                Fecha de termino: 30 de Septiembre del 2021
+                Fecha de termino: <output name="fecha_final" method="GET"> {{ data.5 }}</output>
               </h4>
               <h4 class="u-align-center-sm u-text u-text-default u-text-6">
-                Cargo: Web Designer
+                Cargo: <output name="cargo" method="GET"> {{ data.6 }}</output>
               </h4>
               <h4
                 class="
@@ -204,7 +201,7 @@
                   u-text-7
                 "
               >
-                Dependencia: Desarrollo&nbsp;
+                Dependencia: <output name="dependencia" method="GET"> {{ data.7 }}</output>&nbsp;
               </h4>
               <h4
                 class="
@@ -216,7 +213,7 @@
                   u-text-8
                 "
               >
-                Salario:U$5.000
+                Salario: $ <label name="Salario" method="GET"> {{ data.8 }} COP  </label>
               </h4>
             </div>
           </div>
