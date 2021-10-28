@@ -37,7 +37,7 @@ def index():
                     lag = user[1]
                     dt = get_db()
                     data = dt.execute(
-                        'SELECT nombres , apellidos  FROM empleados WHERE id_empleado= ?' , (lag,)
+                        'SELECT nombres , apellidos, documento , des_contrato, fecha_inicio, fecha_final , des_cargo, des_dependencia, Salario  FROM empleados,contrato,cargo,dependencia WHERE id_empleado= ? AND id_contrato=(SELECT cod_tipo_contrato FROM empleados WHERE id_empleado = ?) AND id_cargo = (SELECT cargo FROM empleados WHERE id_empleado = ?) AND id_dependencia = (SELECT dependencia FROM empleados WHERE id_empleado = ?)' , (lag,lag,lag,lag)
                     ).fetchone()
                     print(data[0])
                     return render_template('VisualizarUsuarioFinal.html', data=data)
