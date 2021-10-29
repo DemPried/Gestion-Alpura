@@ -1,11 +1,35 @@
-from flask import Flask, request, flash, render_template, redirect, url_for
+from flask import Flask, request, flash, render_template, redirect, url_for, session, g
 from werkzeug.security import generate_password_hash, check_password_hash
+import functools
 
 from db import get_db
 
 
 app = Flask(__name__)
 app.debug = True
+
+"""@app.before_request
+def load_logged_in_user():
+    user_id = session.get('user_id')
+    if user_id is None:
+        g.user = None
+    else:
+        db = get_db()
+        g.user = db.execute('SELECT * FROM usuario WHERE id_usuario = ?', (user_id, )).fetchone()
+
+@app.route('/')
+def index():
+    if g.user:
+        return redirect(url_for('send'))
+    return render_template('login.html')
+
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for('login'))
+        return view(**kwargs)
+    return wrapped_view"""
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -122,8 +146,15 @@ flash(empleado_creado)
 
 
 @app.route('/BuscarEmpleados', methods=['GET', 'POST'])
-def buscarEmpleados():
-    return render_template('BuscarEmpleado.html')
+def buscarEmpleados():                 
+    try: 
+        db = get_db
+        data1 = db.execute('SELECT nombres , apellidos, desc_documento, documento , des_contrato, fecha_inicio, fecha_final , des_cargo, des_dependencia, Salario  FROM empleados, documento, contrato,cargo,dependencia WHERE documento= ? AND id_contrato=(SELECT cod_tipo_contrato FROM empleados WHERE documento = ?) AND id_cargo = (SELECT cargo FROM empleados WHERE documento = ?) AND id_dependencia = (SELECT dependencia FROM empleados WHERE documento = ?) AND id_doc = (SELECT tipo_doc FROM empleados WHERE documento = ?)' , (1234567890, 1234567890, 1234567890, 1234567890, 1234567890)).fetchone()
+        
+    except  Exception as ex:
+        print(ex)
+    return render_template('BuscarEmpleado.html', data1=data1)
+    
 
 
 @app.route('/EditarEmpleados', methods=['GET', 'POST'])
@@ -138,7 +169,7 @@ def desempeñoEmpleados():
 
 @app.route('/VisualizadordesdeAdmin', methods=['GET', 'POST'])
 def visualizadordesdeAdmin():
-    return render_template('VisualisadordesdeAdmin.html')
+    return render_template('VisualizarUsuarioFinal.html')
 
 
 @app.route('/menuSuperAdmin', methods=['GET', 'POST'])
@@ -192,7 +223,9 @@ def desempeñoUsuarioSuper():
 
 @app.route('/VisualizarUsuarioSuper', methods=['GET', 'POST'])
 def visualizarUsuarioSupe():
-    return render_template('VisualizardesdeSuper.html')
+    return render_template('VisualizarUsuarioFinal.html')
+
+
 
 
 if __name__ == '__main__':
