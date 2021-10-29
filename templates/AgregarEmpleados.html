@@ -98,7 +98,7 @@
                     <option value="8">Auxiliar de contaduria</option>
                     <option value="9">Director de Marketing</option>
                     <option value="10">Supervisor de ventas</option>
-                    <option value="11">Director Tenologia</option>
+                    <option value="11">Director Tecnologia</option>
                     <option value="12">Jefe de servicio al Cliente</option>
                     <option value="13">Auxiliar Atencion al Cliente</option>
                   </select>
@@ -128,20 +128,20 @@
               </div>
               <div class="u-form-group u-form-group-10">
                 <label for="text-d32c" class="u-label u-text-palette-1-dark-1">Correo</label>
-                <input type="text" placeholder="Ingrese el Salario" id="text-d32c" name="Mail" class="u-border-2 u-border-custom-color-1 u-input u-input-rectangle u-radius-15 u-white u-input-10">
+                <input type="text" placeholder="Ingrese el Correo" id="text-d32c" name="Mail" class="u-border-2 u-border-custom-color-1 u-input u-input-rectangle u-radius-15 u-white u-input-10">
               </div>
               <div class="u-form-group u-form-group-10">
                 <label for="text-d32c" class="u-label u-text-palette-1-dark-1">Contraseña</label>
-                <input type="text" placeholder="Ingrese el Salario" id="text-d32c" name="Password" class="u-border-2 u-border-custom-color-1 u-input u-input-rectangle u-radius-15 u-white u-input-10">
+                <input type="text" placeholder="Ingrese la Contraseña" id="text-d32c" name="Password" class="u-border-2 u-border-custom-color-1 u-input u-input-rectangle u-radius-15 u-white u-input-10">
               </div>
               <div class="u-align-center u-form-group u-form-submit">
                 <!--<a class="u-align-center u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-hover-palette-1-light-1 u-radius-50 u-btn-1" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">GUARDAR EMPLEADO<br>
                 </a>-->
-                <input type="submit" action="{{ url_for('btn_agregarEmpleados') }}" value="submit" class="">
+                <input type="submit" action="{{ url_for('btn_agregarEmpleados') }}" value="GUARDAR EMPLEADO" class="u-align-center u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-hover-palette-1-light-1 u-radius-50 u-btn-1" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">
               </div>
-              <!--<div class="u-form-send-message u-form-send-success"> Gracias! Tu mensaje ha sido enviado. </div>
+              <div class="u-form-send-message u-form-send-success"> Gracias! Tu mensaje ha sido enviado. </div>
               <div class="u-form-send-error u-form-send-message"> No se puede enviar su mensaje. Por favor, corrija los errores y vuelva a intentarlo. </div>
-              <input type="hidden" value="" name="recaptchaResponse">-->
+              <input type="hidden" value="" name="recaptchaResponse">
             </form>
           </div>
         </div>
@@ -156,6 +156,10 @@
           <div class="u-align-right u-container-style u-group u-shape-rectangle u-group-5">
             <div class="u-container-layout u-container-layout-5">
               <a href="https://nicepage.dev" class="u-align-center u-btn u-btn-round u-button-style u-custom-color-1 u-hover-palette-1-light-1 u-radius-50 u-btn-2" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">Subir imagen de empleado</a>
+            </div>
+            <div class="u-container-layout u-container-layout-5">
+              <a href="/menu_administrador" class="u-align-center u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-hover-palette-1-light-1 u-radius-50 u-btn-1" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">MENU PRINCIPAL<br>
+              </a>
             </div>
           </div>
         </div>

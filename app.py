@@ -1,9 +1,11 @@
 from flask import Flask, request, flash, render_template, redirect, url_for
+from werkzeug.security import generate_password_hash, check_password_hash
+
 from db import get_db
 
 
 app = Flask(__name__)
-
+app.debug = True
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -25,20 +27,17 @@ def index():
                 flash(error)
                 return render_template('index.html')
 
-            user = db.execute(
-                'SELECT usuario, id_empleado FROM empleados WHERE correo= ? AND contraseña= ?',
-                (username, password)).fetchone()
+            user = db.execute('SELECT usuario, id_empleado FROM empleados WHERE correo= ? AND contraseña= ?',(username, password)).fetchone()
 
 
             if user is None:
                 error = 'Usuario o contraseña inválidos'
+                flash(error)
             else:
                 if user[0] == 1:
                     lag = user[1]
                     dt = get_db()
-                    data = dt.execute(
-                        'SELECT nombres , apellidos, documento , des_contrato, fecha_inicio, fecha_final , des_cargo, des_dependencia, Salario  FROM empleados,contrato,cargo,dependencia WHERE id_empleado= ? AND id_contrato=(SELECT cod_tipo_contrato FROM empleados WHERE id_empleado = ?) AND id_cargo = (SELECT cargo FROM empleados WHERE id_empleado = ?) AND id_dependencia = (SELECT dependencia FROM empleados WHERE id_empleado = ?)' , (lag,lag,lag,lag)
-                    ).fetchone()
+                    data = dt.execute('SELECT nombres , apellidos, documento , des_contrato, fecha_inicio, fecha_final , des_cargo, des_dependencia, Salario  FROM empleados,contrato,cargo,dependencia WHERE id_empleado= ? AND id_contrato=(SELECT cod_tipo_contrato FROM empleados WHERE id_empleado = ?) AND id_cargo = (SELECT cargo FROM empleados WHERE id_empleado = ?) AND id_dependencia = (SELECT dependencia FROM empleados WHERE id_empleado = ?)' , (lag,lag,lag,lag)).fetchone()
                     print(data[0])
                     return render_template('VisualizarUsuarioFinal.html', data=data)
                 elif user[0] == 2:
@@ -73,12 +72,10 @@ def menu_administrador():
 def btn_agregarEmpleados():
     try:
         if request.method == 'POST':
-
             selectIDtype = request.form['selectIDtype']
             selectCargo = request.form['selectCargo']
             selectContractType = request.form['selectContractType']
             selectDependencia = request.form['selectDependencia']
-
             IDnumber = request.form['IDnumber']
             name = request.form['name']
             lastNames = request.form['lastNames']
@@ -89,13 +86,11 @@ def btn_agregarEmpleados():
             Password = request.form['Password']
 
             db2 = get_db()
-            db2.execute(
-                "INSERT INTO empleados (tipo_doc, documento, usuario, nombres, apellidos, salario, cod_tipo_contrato, cargo, dependencia, fecha_inicio, fecha_final, correo, contraseña) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                (selectIDtype, IDnumber, 1, name, lastNames, Salary, selectContractType, selectCargo, selectDependencia, fechadeingreso, Findelcontrato, Mail,
-                 Password))
+            db2.execute("INSERT INTO empleados (tipo_doc, documento, usuario, nombres, apellidos, salario, cod_tipo_contrato, cargo, dependencia, fecha_inicio, fecha_final, correo, contraseña) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",(selectIDtype, IDnumber, 1, name, lastNames, Salary, selectContractType, selectCargo, selectDependencia, fechadeingreso, Findelcontrato, Mail, generate_password_hash(Password)))
             db2.commit()
-
-            flash("Mensaje Enviado")
+            usuario_creado = "Usuario Creado Con Exito"
+            flash(usuario_creado)
+            
     except Exception as ex:
         print(ex)
 
@@ -152,7 +147,31 @@ def menuSuperAdmin():
 
 
 @app.route('/AgregarUsuarioSuper', methods=['GET', 'POST'])
-def agregarUsuarioSuper():
+def btn_agregarUsuarioSuper():
+    try:
+        if request.method == 'POST':
+            selectIDtype = request.form['selectIDtype']
+            selectCargo = request.form['selectCargo']
+            selectContractType = request.form['selectContractType']
+            selectDependencia = request.form['selectDependencia']
+            IDnumber = request.form['IDnumber']
+            name = request.form['name']
+            lastNames = request.form['lastNames']
+            Salary = request.form['Salary']
+            fechadeingreso = request.form['fechadeingreso']
+            Findelcontrato = request.form['Findelcontrato']
+            Mail = request.form['Mail']
+            Password = request.form['Password']
+
+            db2 = get_db()
+            db2.execute("INSERT INTO empleados (tipo_doc, documento, usuario, nombres, apellidos, salario, cod_tipo_contrato, cargo, dependencia, fecha_inicio, fecha_final, correo, contraseña) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",(selectIDtype, IDnumber, 1, name, lastNames, Salary, selectContractType, selectCargo, selectDependencia, fechadeingreso, Findelcontrato, Mail, generate_password_hash(Password)))
+            db2.commit()
+            usuario_creado = "Usuario Creado Con Exito"
+            flash(usuario_creado)
+            
+    except Exception as ex:
+        print(ex)
+
     return render_template('AgregarUsuario.html')
 
 
