@@ -39,9 +39,11 @@ def index():
                     data=rendervisualf(user)
                     return render_template('VisualizarUsuarioFinal.html', data=data)
                 elif user[0] == 2:
-                    return redirect(url_for('menu_administrador'))
+                    data=rendervisualf(user)
+                    return render_template('gestorEmpleadosAdmin.html', data=data)
                 elif user[0] == 3:
-                    return redirect(url_for('menuSuperAdmin'))
+                    data=rendervisualf(user)
+                    return render_template('gestorUsuarioSuper.html', data=data)
                 db.close_db()
 
         return render_template('index.html')
@@ -74,6 +76,7 @@ def visualizarUsuarioSupe():
 
 @app.route('/menu_administrador', methods=['GET', 'POST'])
 def menu_administrador():
+    data=rendervisualf()
     return render_template('gestorEmpleadosAdmin.html')
 
 
@@ -109,7 +112,7 @@ def btn_agregarEmpleados():
 def puentebuscarEmpleados():
     try:
         db = get_db()
-        data = db.execute('SELECT * FROM empleados').fetchall()
+        data = db.execute('SELECT * FROM empleados WHERE usuario = 1').fetchall()
     except Exception as ex:
         print(ex)
     return render_template('BuscarEmpleado.html', data = data)
@@ -118,7 +121,7 @@ def puentebuscarEmpleados():
 def puentebuscarUsuario():
     try:
         db = get_db()
-        data = db.execute('SELECT * FROM empleados').fetchall()
+        data = db.execute('SELECT * FROM empleados WHERE usuario < 3').fetchall()
     except Exception as ex:
         print(ex)
     return render_template('BuscarEliminarUsuario.html', data = data)
